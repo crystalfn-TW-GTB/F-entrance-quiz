@@ -38,7 +38,7 @@ class App extends Component {
     return (
       <div data-testid="app" className="App">
         <section className="student-group">
-          <header>
+          <header className="student-list-header">
             <h1>分组列表</h1>
             <button onClick={this.handleGroup}>分组学员</button>
           </header>

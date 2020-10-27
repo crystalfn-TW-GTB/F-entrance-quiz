@@ -11,8 +11,9 @@
     display: flex;
     flex-direction: column;
 
-    header {
+    .student-list-header {
       display: flex;
+      width: 880px;
       justify-content: space-between;
 
       button {

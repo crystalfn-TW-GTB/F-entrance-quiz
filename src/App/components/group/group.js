@@ -7,7 +7,7 @@ class Group extends Component {
     const { name, studentDtoList } = this.props;
     return (
       <div className="group">
-        <header>
+        <header className="group-header">
           <span>{name}</span>
         </header>
         <section>
