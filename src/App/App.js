@@ -4,7 +4,6 @@ import './App.scss';
 import Student from './components/student/student';
 
 class App extends Component {
-  // eslint-disable-next-line react/state-in-constructor
   state = {
     studentList: [],
   };
