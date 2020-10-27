@@ -1,2 +1,13 @@
 .App {
+  display: flex;
+  flex-direction: column;
+
+  .student-group {
+    display: flex;
+    flex-direction: column;
+
+    header {
+      display: flex;
+    }
+  }
 }
