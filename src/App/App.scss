@@ -1,6 +1,11 @@
+@import '../style/variables';
+
 .App {
   display: flex;
   flex-direction: column;
+  width: 900px;
+  background-color: $bg-gray;
+  padding: 20px 10px;
 
   .student-group {
     display: flex;
@@ -8,6 +13,46 @@
 
     header {
       display: flex;
+      width: 880px;
+      justify-content: space-between;
+
+      button {
+        align-self: center;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        outline: none;
+        height: 30px;
+        width: 100px;
+        background-color: $primary-color;
+        color: #fff;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .student-list {
+    section {
+      padding-left: 10px;
+      display: flex;
+      flex-wrap: wrap;
+
+      button {
+        margin: 0;
+        padding: 0;
+        outline: none;
+        border: 1px solid $gray;
+        cursor: pointer;
+
+        background-color: $light-gray;
+        width: 100px;
+        margin-bottom: 10px;
+        margin-right: 10px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
   }
 }

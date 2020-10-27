@@ -32,12 +32,13 @@ class App extends Component {
         <section className="student-list">
           <header>
             <h1>学员列表</h1>
-            <section>
-              {studentList.map((student) => (
-                <Student key={student.id} id={student.id} name={student.name} />
-              ))}
-            </section>
           </header>
+          <section>
+            {studentList.map((student) => (
+              <Student key={student.id} id={student.id} name={student.name} />
+            ))}
+            <button>+添加学员</button>
+          </section>
         </section>
       </div>
     );
