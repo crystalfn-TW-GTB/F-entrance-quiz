@@ -2,10 +2,12 @@
 import React, { Component } from 'react';
 import './App.scss';
 import Student from './components/student/student';
+import Group from './components/group/group';
 
 class App extends Component {
   state = {
     studentList: [],
+    groupList: [],
   };
 
   componentDidMount() {
@@ -19,15 +21,32 @@ class App extends Component {
       });
   }
 
+  handleGroup = () => {
+    const url = 'http://localhost:8080/groups';
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        this.setState({
+          groupList: data,
+        });
+      });
+  };
+
   render() {
-    const { studentList } = this.state;
+    const { studentList, groupList } = this.state;
     return (
       <div data-testid="app" className="App">
         <section className="student-group">
           <header>
             <h1>分组列表</h1>
-            <button>分组学员</button>
+            <button onClick={this.handleGroup}>分组学员</button>
           </header>
+          <section>
+            {groupList.map((group, index) => (
+              <Group key={index} name={group.name} studentDtoList={group.studentDtoList} />
+            ))}
+          </section>
         </section>
         <section className="student-list">
           <header>
