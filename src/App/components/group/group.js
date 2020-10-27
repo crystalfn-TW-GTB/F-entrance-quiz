@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Student from '../student/student';
+import './group.scss';
 
 class Group extends Component {
   render() {
