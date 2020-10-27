@@ -8,9 +8,11 @@ class App extends Component {
   state = {
     studentList: [],
     groupList: [],
+    isAddStudent: false,
+    studentName: '',
   };
 
-  componentDidMount() {
+  getAllStudents = () => {
     const url = 'http://localhost:8080/students';
     fetch(url)
       .then((response) => response.json())
@@ -19,6 +21,10 @@ class App extends Component {
           studentList: data,
         });
       });
+  };
+
+  componentDidMount() {
+    this.getAllStudents();
   }
 
   handleGroup = () => {
@@ -33,14 +39,53 @@ class App extends Component {
       });
   };
 
+  handleAddStudent = () => {
+    this.setState({
+      isAddStudent: true,
+    });
+  };
+
+  handleNameChange = (event) => {
+    this.setState({
+      studentName: event.target.value,
+    });
+  };
+
+  addNewStudent = (event) => {
+    if (event.keyCode === 13) {
+      const url = 'http://localhost:8080/student';
+      fetch(url, {
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        method: 'POST',
+        body: this.state.studentName,
+      }).then((response) => {
+        if (response.status === 201) {
+          this.getAllStudents();
+          alert('添加学员成功！');
+        }
+      });
+
+      this.setState({
+        isAddStudent: false,
+        studentName: '',
+      });
+    }
+  };
+
   render() {
-    const { studentList, groupList } = this.state;
+    const { studentList, groupList, isAddStudent, studentName } = this.state;
     return (
       <div data-testid="app" className="App">
         <section className="student-group">
           <header className="student-list-header">
             <h1>分组列表</h1>
-            <button onClick={this.handleGroup}>分组学员</button>
+            <button type="button" onClick={this.handleGroup}>
+              分组学员
+            </button>
           </header>
           <section>
             {groupList.map((group, index) => (
@@ -56,7 +101,18 @@ class App extends Component {
             {studentList.map((student) => (
               <Student key={student.id} id={student.id} name={student.name} />
             ))}
-            <button>+添加学员</button>
+            {isAddStudent ? (
+              <input
+                type="text"
+                value={studentName}
+                onChange={this.handleNameChange}
+                onKeyUp={this.addNewStudent}
+              />
+            ) : (
+              <button type="button" onClick={this.handleAddStudent}>
+                +添加学员
+              </button>
+            )}
           </section>
         </section>
       </div>
