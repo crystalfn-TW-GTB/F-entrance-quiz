@@ -1,16 +1,22 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import './App.scss';
 import Student from './components/student/student';
 import Group from './components/group/group';
 
 class App extends Component {
-  state = {
-    studentList: [],
-    groupList: [],
-    isAddStudent: false,
-    studentName: '',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      studentList: [],
+      groupList: [],
+      isAddStudent: false,
+      studentName: '',
+    };
+  }
+
+  componentDidMount() {
+    this.getAllStudents();
+  }
 
   getAllStudents = () => {
     const url = 'http://localhost:8080/students';
@@ -22,10 +28,6 @@ class App extends Component {
         });
       });
   };
-
-  componentDidMount() {
-    this.getAllStudents();
-  }
 
   handleGroup = () => {
     const url = 'http://localhost:8080/groups';
@@ -64,7 +66,6 @@ class App extends Component {
       }).then((response) => {
         if (response.status === 201) {
           this.getAllStudents();
-          alert('添加学员成功！');
         }
       });
 
@@ -87,8 +88,8 @@ class App extends Component {
             </button>
           </header>
           <section>
-            {groupList.map((group, index) => (
-              <Group key={index} name={group.name} studentDtoList={group.studentDtoList} />
+            {groupList.map((group) => (
+              <Group key={group.name} name={group.name} studentDtoList={group.studentDtoList} />
             ))}
           </section>
         </section>
