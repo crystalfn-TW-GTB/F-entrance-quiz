@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Student from '../student/student';
 import './group.scss';
 
+// TODO GTB-3: - UI组件可以写成函数组件形式
 class Group extends Component {
   render() {
     const { name, studentDtoList } = this.props;
